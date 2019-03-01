@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package mjpitz.des.api;
+
+import "deps.proto";
+
+option go_package = "api";
+
+message ExtractRequest {
+    string repositoryUrl = 1;
+}
+
+message ExtractResponse {
+    string repositoryUrl = 1;
+    repeated mjpitz.des.api.DependencyManagementFile managementFiles = 2;
+}
+
+service DependencyExtractor {
+    rpc Extract(ExtractRequest) returns (ExtractResponse);
+}
