@@ -1,4 +1,4 @@
 package api
 
-//go:generate protoc -I=. -I=$GOPATH/src --gogo_out=:. deps.proto
-//go:generate protoc -I=. -I=$GOPATH/src --gogo_out=:. extractor.proto
+//go:generate protoc -I=. -I=$GOPATH/src --gogo_out=plugins=grpc:. deps.proto
+//go:generate protoc -I=. -I=$GOPATH/src --gogo_out=plugins=grpc:. extractor.proto

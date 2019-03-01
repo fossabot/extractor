@@ -7,6 +7,11 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -105,6 +110,78 @@ func (m *ExtractResponse) GetManagementFiles() []*DependencyManagementFile {
 func init() {
 	proto.RegisterType((*ExtractRequest)(nil), "mjpitz.des.api.ExtractRequest")
 	proto.RegisterType((*ExtractResponse)(nil), "mjpitz.des.api.ExtractResponse")
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// DependencyExtractorClient is the client API for DependencyExtractor service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type DependencyExtractorClient interface {
+	Extract(ctx context.Context, in *ExtractRequest, opts ...grpc.CallOption) (*ExtractResponse, error)
+}
+
+type dependencyExtractorClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewDependencyExtractorClient(cc *grpc.ClientConn) DependencyExtractorClient {
+	return &dependencyExtractorClient{cc}
+}
+
+func (c *dependencyExtractorClient) Extract(ctx context.Context, in *ExtractRequest, opts ...grpc.CallOption) (*ExtractResponse, error) {
+	out := new(ExtractResponse)
+	err := c.cc.Invoke(ctx, "/mjpitz.des.api.DependencyExtractor/Extract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DependencyExtractorServer is the server API for DependencyExtractor service.
+type DependencyExtractorServer interface {
+	Extract(context.Context, *ExtractRequest) (*ExtractResponse, error)
+}
+
+func RegisterDependencyExtractorServer(s *grpc.Server, srv DependencyExtractorServer) {
+	s.RegisterService(&_DependencyExtractor_serviceDesc, srv)
+}
+
+func _DependencyExtractor_Extract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExtractRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DependencyExtractorServer).Extract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mjpitz.des.api.DependencyExtractor/Extract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DependencyExtractorServer).Extract(ctx, req.(*ExtractRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _DependencyExtractor_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "mjpitz.des.api.DependencyExtractor",
+	HandlerType: (*DependencyExtractorServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Extract",
+			Handler:    _DependencyExtractor_Extract_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "extractor.proto",
 }
 
 func init() { proto.RegisterFile("extractor.proto", fileDescriptor_extractor_6360f559cff18f70) }
