@@ -24,17 +24,18 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type ExtractRequest struct {
-	RepositoryUrl        string   `protobuf:"bytes,1,opt,name=repositoryUrl,proto3" json:"repositoryUrl,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Separator            string            `protobuf:"bytes,1,opt,name=separator,proto3" json:"separator,omitempty"`
+	FileContents         map[string]string `protobuf:"bytes,2,rep,name=file_contents,json=fileContents,proto3" json:"file_contents,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
 func (m *ExtractRequest) Reset()         { *m = ExtractRequest{} }
 func (m *ExtractRequest) String() string { return proto.CompactTextString(m) }
 func (*ExtractRequest) ProtoMessage()    {}
 func (*ExtractRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_extractor_6360f559cff18f70, []int{0}
+	return fileDescriptor_extractor_03b7527757c25428, []int{0}
 }
 func (m *ExtractRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ExtractRequest.Unmarshal(m, b)
@@ -54,16 +55,22 @@ func (m *ExtractRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ExtractRequest proto.InternalMessageInfo
 
-func (m *ExtractRequest) GetRepositoryUrl() string {
+func (m *ExtractRequest) GetSeparator() string {
 	if m != nil {
-		return m.RepositoryUrl
+		return m.Separator
 	}
 	return ""
 }
 
+func (m *ExtractRequest) GetFileContents() map[string]string {
+	if m != nil {
+		return m.FileContents
+	}
+	return nil
+}
+
 type ExtractResponse struct {
-	RepositoryUrl        string                      `protobuf:"bytes,1,opt,name=repositoryUrl,proto3" json:"repositoryUrl,omitempty"`
-	ManagementFiles      []*DependencyManagementFile `protobuf:"bytes,2,rep,name=managementFiles,proto3" json:"managementFiles,omitempty"`
+	ManagementFiles      []*DependencyManagementFile `protobuf:"bytes,1,rep,name=managementFiles,proto3" json:"managementFiles,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                    `json:"-"`
 	XXX_unrecognized     []byte                      `json:"-"`
 	XXX_sizecache        int32                       `json:"-"`
@@ -73,7 +80,7 @@ func (m *ExtractResponse) Reset()         { *m = ExtractResponse{} }
 func (m *ExtractResponse) String() string { return proto.CompactTextString(m) }
 func (*ExtractResponse) ProtoMessage()    {}
 func (*ExtractResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_extractor_6360f559cff18f70, []int{1}
+	return fileDescriptor_extractor_03b7527757c25428, []int{1}
 }
 func (m *ExtractResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ExtractResponse.Unmarshal(m, b)
@@ -93,13 +100,6 @@ func (m *ExtractResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ExtractResponse proto.InternalMessageInfo
 
-func (m *ExtractResponse) GetRepositoryUrl() string {
-	if m != nil {
-		return m.RepositoryUrl
-	}
-	return ""
-}
-
 func (m *ExtractResponse) GetManagementFiles() []*DependencyManagementFile {
 	if m != nil {
 		return m.ManagementFiles
@@ -107,9 +107,96 @@ func (m *ExtractResponse) GetManagementFiles() []*DependencyManagementFile {
 	return nil
 }
 
+type MatchRequest struct {
+	Separator            string   `protobuf:"bytes,1,opt,name=separator,proto3" json:"separator,omitempty"`
+	Paths                []string `protobuf:"bytes,2,rep,name=paths,proto3" json:"paths,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *MatchRequest) Reset()         { *m = MatchRequest{} }
+func (m *MatchRequest) String() string { return proto.CompactTextString(m) }
+func (*MatchRequest) ProtoMessage()    {}
+func (*MatchRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_extractor_03b7527757c25428, []int{2}
+}
+func (m *MatchRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_MatchRequest.Unmarshal(m, b)
+}
+func (m *MatchRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MatchRequest.Marshal(b, m, deterministic)
+}
+func (dst *MatchRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MatchRequest.Merge(dst, src)
+}
+func (m *MatchRequest) XXX_Size() int {
+	return xxx_messageInfo_MatchRequest.Size(m)
+}
+func (m *MatchRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MatchRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MatchRequest proto.InternalMessageInfo
+
+func (m *MatchRequest) GetSeparator() string {
+	if m != nil {
+		return m.Separator
+	}
+	return ""
+}
+
+func (m *MatchRequest) GetPaths() []string {
+	if m != nil {
+		return m.Paths
+	}
+	return nil
+}
+
+type MatchResponse struct {
+	MatchedPaths         []string `protobuf:"bytes,1,rep,name=matchedPaths,proto3" json:"matchedPaths,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *MatchResponse) Reset()         { *m = MatchResponse{} }
+func (m *MatchResponse) String() string { return proto.CompactTextString(m) }
+func (*MatchResponse) ProtoMessage()    {}
+func (*MatchResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_extractor_03b7527757c25428, []int{3}
+}
+func (m *MatchResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_MatchResponse.Unmarshal(m, b)
+}
+func (m *MatchResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MatchResponse.Marshal(b, m, deterministic)
+}
+func (dst *MatchResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MatchResponse.Merge(dst, src)
+}
+func (m *MatchResponse) XXX_Size() int {
+	return xxx_messageInfo_MatchResponse.Size(m)
+}
+func (m *MatchResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MatchResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MatchResponse proto.InternalMessageInfo
+
+func (m *MatchResponse) GetMatchedPaths() []string {
+	if m != nil {
+		return m.MatchedPaths
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*ExtractRequest)(nil), "mjpitz.des.api.ExtractRequest")
+	proto.RegisterMapType((map[string]string)(nil), "mjpitz.des.api.ExtractRequest.FileContentsEntry")
 	proto.RegisterType((*ExtractResponse)(nil), "mjpitz.des.api.ExtractResponse")
+	proto.RegisterType((*MatchRequest)(nil), "mjpitz.des.api.MatchRequest")
+	proto.RegisterType((*MatchResponse)(nil), "mjpitz.des.api.MatchResponse")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -124,6 +211,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type DependencyExtractorClient interface {
+	Match(ctx context.Context, in *MatchRequest, opts ...grpc.CallOption) (*MatchResponse, error)
 	Extract(ctx context.Context, in *ExtractRequest, opts ...grpc.CallOption) (*ExtractResponse, error)
 }
 
@@ -133,6 +221,15 @@ type dependencyExtractorClient struct {
 
 func NewDependencyExtractorClient(cc *grpc.ClientConn) DependencyExtractorClient {
 	return &dependencyExtractorClient{cc}
+}
+
+func (c *dependencyExtractorClient) Match(ctx context.Context, in *MatchRequest, opts ...grpc.CallOption) (*MatchResponse, error) {
+	out := new(MatchResponse)
+	err := c.cc.Invoke(ctx, "/mjpitz.des.api.DependencyExtractor/Match", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *dependencyExtractorClient) Extract(ctx context.Context, in *ExtractRequest, opts ...grpc.CallOption) (*ExtractResponse, error) {
@@ -146,11 +243,30 @@ func (c *dependencyExtractorClient) Extract(ctx context.Context, in *ExtractRequ
 
 // DependencyExtractorServer is the server API for DependencyExtractor service.
 type DependencyExtractorServer interface {
+	Match(context.Context, *MatchRequest) (*MatchResponse, error)
 	Extract(context.Context, *ExtractRequest) (*ExtractResponse, error)
 }
 
 func RegisterDependencyExtractorServer(s *grpc.Server, srv DependencyExtractorServer) {
 	s.RegisterService(&_DependencyExtractor_serviceDesc, srv)
+}
+
+func _DependencyExtractor_Match_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MatchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DependencyExtractorServer).Match(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mjpitz.des.api.DependencyExtractor/Match",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DependencyExtractorServer).Match(ctx, req.(*MatchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _DependencyExtractor_Extract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -176,6 +292,10 @@ var _DependencyExtractor_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*DependencyExtractorServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "Match",
+			Handler:    _DependencyExtractor_Match_Handler,
+		},
+		{
 			MethodName: "Extract",
 			Handler:    _DependencyExtractor_Extract_Handler,
 		},
@@ -184,21 +304,29 @@ var _DependencyExtractor_serviceDesc = grpc.ServiceDesc{
 	Metadata: "extractor.proto",
 }
 
-func init() { proto.RegisterFile("extractor.proto", fileDescriptor_extractor_6360f559cff18f70) }
+func init() { proto.RegisterFile("extractor.proto", fileDescriptor_extractor_03b7527757c25428) }
 
-var fileDescriptor_extractor_6360f559cff18f70 = []byte{
-	// 208 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4f, 0xad, 0x28, 0x29,
-	0x4a, 0x4c, 0x2e, 0xc9, 0x2f, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0xcb, 0xcd, 0x2a,
-	0xc8, 0x2c, 0xa9, 0xd2, 0x4b, 0x49, 0x2d, 0xd6, 0x4b, 0x2c, 0xc8, 0x94, 0xe2, 0x4a, 0x49, 0x2d,
-	0x28, 0x86, 0xc8, 0x29, 0x99, 0x71, 0xf1, 0xb9, 0x42, 0x94, 0x07, 0xa5, 0x16, 0x96, 0xa6, 0x16,
-	0x97, 0x08, 0xa9, 0x70, 0xf1, 0x16, 0xa5, 0x16, 0xe4, 0x17, 0x67, 0x96, 0xe4, 0x17, 0x55, 0x86,
-	0x16, 0xe5, 0x48, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06, 0xa1, 0x0a, 0x2a, 0x75, 0x33, 0x72, 0xf1,
-	0xc3, 0x35, 0x16, 0x17, 0xe4, 0xe7, 0x15, 0xa7, 0x12, 0xa7, 0x53, 0x28, 0x88, 0x8b, 0x3f, 0x37,
-	0x31, 0x2f, 0x31, 0x3d, 0x35, 0x37, 0x35, 0xaf, 0xc4, 0x2d, 0x33, 0x27, 0xb5, 0x58, 0x82, 0x49,
-	0x81, 0x59, 0x83, 0xdb, 0x48, 0x43, 0x0f, 0xd5, 0x9d, 0x7a, 0x2e, 0xa9, 0x05, 0xa9, 0x79, 0x29,
-	0xa9, 0x79, 0xc9, 0x95, 0xbe, 0x28, 0x1a, 0x82, 0xd0, 0x0d, 0x30, 0x4a, 0xe4, 0x12, 0x46, 0x28,
-	0x76, 0x85, 0x79, 0x5f, 0xc8, 0x8b, 0x8b, 0x1d, 0xca, 0x11, 0x92, 0x43, 0x37, 0x1c, 0xd5, 0xd7,
-	0x52, 0xf2, 0x38, 0xe5, 0x21, 0x9e, 0x73, 0x62, 0x8d, 0x62, 0x4e, 0x2c, 0xc8, 0x4c, 0x62, 0x03,
-	0x07, 0x9b, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0xe1, 0x32, 0x17, 0xb0, 0x65, 0x01, 0x00, 0x00,
+var fileDescriptor_extractor_03b7527757c25428 = []byte{
+	// 336 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x92, 0xcf, 0x4e, 0xc2, 0x40,
+	0x10, 0xc6, 0xb3, 0x90, 0x6a, 0x18, 0xf9, 0xa3, 0x2b, 0x87, 0xa6, 0x41, 0x25, 0x3d, 0x71, 0x6a,
+	0x0c, 0x5c, 0x8c, 0x17, 0x13, 0x04, 0x0f, 0x26, 0x24, 0xa6, 0x89, 0x17, 0x2f, 0x66, 0x6d, 0x07,
+	0xa9, 0xd2, 0xed, 0xda, 0x1d, 0x8c, 0xf8, 0x42, 0xbe, 0x89, 0xcf, 0x65, 0x68, 0x57, 0xa1, 0x35,
+	0x18, 0x6f, 0xdd, 0x6f, 0xbe, 0xfd, 0xe6, 0xd7, 0x99, 0x85, 0x16, 0xbe, 0x51, 0x2a, 0x02, 0x4a,
+	0x52, 0x4f, 0xa5, 0x09, 0x25, 0xbc, 0x19, 0x3f, 0xa9, 0x88, 0xde, 0xbd, 0x10, 0xb5, 0x27, 0x54,
+	0xe4, 0x40, 0x88, 0x4a, 0xe7, 0x35, 0xf7, 0x93, 0x41, 0x73, 0x9c, 0xfb, 0x7d, 0x7c, 0x59, 0xa0,
+	0x26, 0xde, 0x81, 0x9a, 0x46, 0x25, 0x52, 0x41, 0x49, 0x6a, 0xb3, 0x2e, 0xeb, 0xd5, 0xfc, 0xb5,
+	0xc0, 0x6f, 0xa1, 0x31, 0x8d, 0xe6, 0x78, 0x1f, 0x24, 0x92, 0x50, 0x92, 0xb6, 0x2b, 0xdd, 0x6a,
+	0x6f, 0xaf, 0x7f, 0xea, 0x15, 0x9b, 0x78, 0xc5, 0x50, 0xef, 0x2a, 0x9a, 0xe3, 0xa5, 0xb9, 0x32,
+	0x96, 0x94, 0x2e, 0xfd, 0xfa, 0x74, 0x43, 0x72, 0x2e, 0xe0, 0xe0, 0x97, 0x85, 0xef, 0x43, 0xf5,
+	0x19, 0x97, 0x86, 0x61, 0xf5, 0xc9, 0xdb, 0x60, 0xbd, 0x8a, 0xf9, 0x02, 0xed, 0x4a, 0xa6, 0xe5,
+	0x87, 0xf3, 0xca, 0x19, 0x73, 0x11, 0x5a, 0x3f, 0x2d, 0xb5, 0x4a, 0xa4, 0x46, 0xee, 0x43, 0x2b,
+	0x16, 0x52, 0x3c, 0x62, 0x8c, 0x92, 0x56, 0xe9, 0xda, 0x66, 0x19, 0x6c, 0xaf, 0x0c, 0x3b, 0x42,
+	0x85, 0x32, 0x44, 0x19, 0x2c, 0x27, 0x85, 0x0b, 0x7e, 0x39, 0xc0, 0x1d, 0x42, 0x7d, 0x22, 0x28,
+	0x98, 0xfd, 0x6f, 0x58, 0x6d, 0xb0, 0x94, 0xa0, 0x59, 0x3e, 0xa4, 0x9a, 0x9f, 0x1f, 0xdc, 0x01,
+	0x34, 0x4c, 0x86, 0x01, 0x75, 0xa1, 0x1e, 0xaf, 0x04, 0x0c, 0x6f, 0x32, 0x37, 0xcb, 0xdc, 0x05,
+	0xad, 0xff, 0xc1, 0xe0, 0x70, 0x8d, 0x39, 0xfe, 0x5e, 0x31, 0x1f, 0x81, 0x95, 0x85, 0xf1, 0x4e,
+	0xf9, 0xa7, 0x36, 0x39, 0x9d, 0xa3, 0x2d, 0x55, 0x43, 0x70, 0x0d, 0xbb, 0x26, 0x92, 0x1f, 0xff,
+	0xbd, 0x49, 0xe7, 0x64, 0x6b, 0x3d, 0xcf, 0x1a, 0x5a, 0x77, 0x55, 0xa1, 0xa2, 0x87, 0x9d, 0xec,
+	0x81, 0x0d, 0xbe, 0x02, 0x00, 0x00, 0xff, 0xff, 0xc1, 0x6c, 0xa7, 0xd1, 0x8f, 0x02, 0x00, 0x00,
 }
