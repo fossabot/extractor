@@ -18,4 +18,4 @@ const packageDefinition = protoLoader.loadSync(
 
 const descriptor = grpc.loadPackageDefinition(packageDefinition);
 
-module.exports = descriptor.mjpitz.des.api;
+module.exports = descriptor.cloud.deps.des.api;

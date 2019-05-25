@@ -159,8 +159,8 @@ func (m *DependencyManagementFile) GetDependencies() []*Dependency {
 }
 
 func init() {
-	proto.RegisterType((*Dependency)(nil), "mjpitz.des.api.Dependency")
-	proto.RegisterType((*DependencyManagementFile)(nil), "mjpitz.des.api.DependencyManagementFile")
+	proto.RegisterType((*Dependency)(nil), "deps-cloud.des.api.Dependency")
+	proto.RegisterType((*DependencyManagementFile)(nil), "deps-cloud.des.api.DependencyManagementFile")
 }
 
 func init() { proto.RegisterFile("deps.proto", fileDescriptor_deps_9ed397ad379b8a34) }

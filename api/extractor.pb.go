@@ -192,11 +192,11 @@ func (m *MatchResponse) GetMatchedPaths() []string {
 }
 
 func init() {
-	proto.RegisterType((*ExtractRequest)(nil), "mjpitz.des.api.ExtractRequest")
-	proto.RegisterMapType((map[string]string)(nil), "mjpitz.des.api.ExtractRequest.FileContentsEntry")
-	proto.RegisterType((*ExtractResponse)(nil), "mjpitz.des.api.ExtractResponse")
-	proto.RegisterType((*MatchRequest)(nil), "mjpitz.des.api.MatchRequest")
-	proto.RegisterType((*MatchResponse)(nil), "mjpitz.des.api.MatchResponse")
+	proto.RegisterType((*ExtractRequest)(nil), "deps-cloud.des.api.ExtractRequest")
+	proto.RegisterMapType((map[string]string)(nil), "deps-cloud.des.api.ExtractRequest.FileContentsEntry")
+	proto.RegisterType((*ExtractResponse)(nil), "deps-cloud.des.api.ExtractResponse")
+	proto.RegisterType((*MatchRequest)(nil), "deps-cloud.des.api.MatchRequest")
+	proto.RegisterType((*MatchResponse)(nil), "deps-cloud.des.api.MatchResponse")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -225,7 +225,7 @@ func NewDependencyExtractorClient(cc *grpc.ClientConn) DependencyExtractorClient
 
 func (c *dependencyExtractorClient) Match(ctx context.Context, in *MatchRequest, opts ...grpc.CallOption) (*MatchResponse, error) {
 	out := new(MatchResponse)
-	err := c.cc.Invoke(ctx, "/mjpitz.des.api.DependencyExtractor/Match", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/deps-cloud.des.api.DependencyExtractor/Match", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -234,7 +234,7 @@ func (c *dependencyExtractorClient) Match(ctx context.Context, in *MatchRequest,
 
 func (c *dependencyExtractorClient) Extract(ctx context.Context, in *ExtractRequest, opts ...grpc.CallOption) (*ExtractResponse, error) {
 	out := new(ExtractResponse)
-	err := c.cc.Invoke(ctx, "/mjpitz.des.api.DependencyExtractor/Extract", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/deps-cloud.des.api.DependencyExtractor/Extract", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -261,7 +261,7 @@ func _DependencyExtractor_Match_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/mjpitz.des.api.DependencyExtractor/Match",
+		FullMethod: "/deps-cloud.des.api.DependencyExtractor/Match",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DependencyExtractorServer).Match(ctx, req.(*MatchRequest))
@@ -279,7 +279,7 @@ func _DependencyExtractor_Extract_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/mjpitz.des.api.DependencyExtractor/Extract",
+		FullMethod: "/deps-cloud.des.api.DependencyExtractor/Extract",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DependencyExtractorServer).Extract(ctx, req.(*ExtractRequest))
@@ -288,7 +288,7 @@ func _DependencyExtractor_Extract_Handler(srv interface{}, ctx context.Context, 
 }
 
 var _DependencyExtractor_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "mjpitz.des.api.DependencyExtractor",
+	ServiceName: "deps-cloud.des.api.DependencyExtractor",
 	HandlerType: (*DependencyExtractorServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

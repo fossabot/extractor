@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package mjpitz.des.api;
+package cloud.deps.des.api;
 
 import "deps.proto";
 
@@ -12,7 +12,7 @@ message ExtractRequest {
 }
 
 message ExtractResponse {
-    repeated mjpitz.des.api.DependencyManagementFile managementFiles = 1;
+    repeated cloud.deps.des.api.DependencyManagementFile managementFiles = 1;
 }
 
 message MatchRequest {

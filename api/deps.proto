@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package mjpitz.des.api;
+package cloud.deps.des.api;
 
 option go_package = "api";
 
