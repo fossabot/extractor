@@ -8,7 +8,7 @@ option go_package = "api";
 
 message ExtractRequest {
     string separator = 1;
-    map<string, string> file_contents = 2;
+    map<string, string> fileContents = 2;
 }
 
 message ExtractResponse {
