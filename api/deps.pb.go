@@ -3,9 +3,11 @@
 
 package api
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -32,7 +34,7 @@ func (m *Dependency) Reset()         { *m = Dependency{} }
 func (m *Dependency) String() string { return proto.CompactTextString(m) }
 func (*Dependency) ProtoMessage()    {}
 func (*Dependency) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deps_4055fe9038ebc221, []int{0}
+	return fileDescriptor_8a878629c37a3cae, []int{0}
 }
 func (m *Dependency) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Dependency.Unmarshal(m, b)
@@ -40,8 +42,8 @@ func (m *Dependency) XXX_Unmarshal(b []byte) error {
 func (m *Dependency) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Dependency.Marshal(b, m, deterministic)
 }
-func (dst *Dependency) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Dependency.Merge(dst, src)
+func (m *Dependency) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Dependency.Merge(m, src)
 }
 func (m *Dependency) XXX_Size() int {
 	return xxx_messageInfo_Dependency.Size(m)
@@ -96,7 +98,7 @@ func (m *DependencyManagementFile) Reset()         { *m = DependencyManagementFi
 func (m *DependencyManagementFile) String() string { return proto.CompactTextString(m) }
 func (*DependencyManagementFile) ProtoMessage()    {}
 func (*DependencyManagementFile) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deps_4055fe9038ebc221, []int{1}
+	return fileDescriptor_8a878629c37a3cae, []int{1}
 }
 func (m *DependencyManagementFile) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DependencyManagementFile.Unmarshal(m, b)
@@ -104,8 +106,8 @@ func (m *DependencyManagementFile) XXX_Unmarshal(b []byte) error {
 func (m *DependencyManagementFile) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DependencyManagementFile.Marshal(b, m, deterministic)
 }
-func (dst *DependencyManagementFile) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DependencyManagementFile.Merge(dst, src)
+func (m *DependencyManagementFile) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DependencyManagementFile.Merge(m, src)
 }
 func (m *DependencyManagementFile) XXX_Size() int {
 	return xxx_messageInfo_DependencyManagementFile.Size(m)
@@ -163,9 +165,9 @@ func init() {
 	proto.RegisterType((*DependencyManagementFile)(nil), "cloud.deps.des.api.DependencyManagementFile")
 }
 
-func init() { proto.RegisterFile("deps.proto", fileDescriptor_deps_4055fe9038ebc221) }
+func init() { proto.RegisterFile("deps.proto", fileDescriptor_8a878629c37a3cae) }
 
-var fileDescriptor_deps_4055fe9038ebc221 = []byte{
+var fileDescriptor_8a878629c37a3cae = []byte{
 	// 245 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x90, 0xbf, 0x4a, 0xc4, 0x40,
 	0x10, 0xc6, 0x89, 0xf1, 0xfe, 0x38, 0x5e, 0xe3, 0x16, 0xb2, 0x58, 0x48, 0x48, 0x75, 0x85, 0x6c,

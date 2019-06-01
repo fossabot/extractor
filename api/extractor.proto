@@ -4,6 +4,8 @@ package cloud.deps.des.api;
 
 import "deps.proto";
 
+import "github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis/google/api/annotations.proto";
+
 option go_package = "api";
 
 message ExtractRequest {
@@ -25,7 +27,17 @@ message MatchResponse {
 }
 
 service DependencyExtractor {
-    rpc Match(MatchRequest) returns (MatchResponse);
+    rpc Match(MatchRequest) returns (MatchResponse) {
+        option (google.api.http) = {
+            post: "/v1/dependencies/match"
+            body: "*"
+        };
+    }
 
-    rpc Extract(ExtractRequest) returns (ExtractResponse);
+    rpc Extract(ExtractRequest) returns (ExtractResponse) {
+        option (google.api.http) = {
+            post: "/v1/dependencies/extract"
+            body: "*"
+        };
+    }
 }
