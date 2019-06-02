@@ -1,0 +1,169 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "extractor.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/dependencies/extract": {
+      "post": {
+        "operationId": "Extract",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiExtractResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiExtractRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DependencyExtractor"
+        ]
+      }
+    },
+    "/v1/dependencies/match": {
+      "post": {
+        "operationId": "Match",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiMatchResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiMatchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DependencyExtractor"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiDependency": {
+      "type": "object",
+      "properties": {
+        "organization": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string"
+        },
+        "versionConstraint": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "apiDependencyManagementFile": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "system": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDependency"
+          }
+        }
+      }
+    },
+    "apiExtractRequest": {
+      "type": "object",
+      "properties": {
+        "separator": {
+          "type": "string"
+        },
+        "fileContents": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "apiExtractResponse": {
+      "type": "object",
+      "properties": {
+        "managementFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDependencyManagementFile"
+          }
+        }
+      }
+    },
+    "apiMatchRequest": {
+      "type": "object",
+      "properties": {
+        "separator": {
+          "type": "string"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "apiMatchResponse": {
+      "type": "object",
+      "properties": {
+        "matchedPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
