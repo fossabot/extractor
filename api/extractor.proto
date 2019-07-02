@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cloud.deps.des.api;
+package cloud.deps.dependency_extractor.api;
 
 import "deps.proto";
 
@@ -14,7 +14,7 @@ message ExtractRequest {
 }
 
 message ExtractResponse {
-    repeated cloud.deps.des.api.DependencyManagementFile managementFiles = 1;
+    repeated cloud.deps.dependency_extractor.api.DependencyManagementFile managementFiles = 1;
 }
 
 message MatchRequest {

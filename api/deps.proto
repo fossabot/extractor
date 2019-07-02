@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package cloud.deps.des.api;
+package cloud.deps.dependency_extractor.api;
 
 option go_package = "api";
 
