@@ -11,6 +11,7 @@ export interface MatchResponse {
 }
 
 export interface ExtractRequest {
+    url: string;
     separator: string;
     fileContents: { [key: string]: string };
 }
