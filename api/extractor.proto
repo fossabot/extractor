@@ -11,6 +11,7 @@ option go_package = "api";
 message ExtractRequest {
     string separator = 1;
     map<string, string> fileContents = 2;
+    string url = 3;
 }
 
 message ExtractResponse {
