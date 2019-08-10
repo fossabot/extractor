@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/v1/dependencies/extract": {
+    "/v1alpha/dependencies/extract": {
       "post": {
         "operationId": "Extract",
         "responses": {
@@ -41,7 +41,7 @@
         ]
       }
     },
-    "/v1/dependencies/match": {
+    "/v1alpha/dependencies/match": {
       "post": {
         "operationId": "Match",
         "responses": {
