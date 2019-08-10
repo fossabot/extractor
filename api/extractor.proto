@@ -30,14 +30,14 @@ message MatchResponse {
 service DependencyExtractor {
     rpc Match(MatchRequest) returns (MatchResponse) {
         option (google.api.http) = {
-            post: "/v1/dependencies/match"
+            post: "/v1alpha/dependencies/match"
             body: "*"
         };
     }
 
     rpc Extract(ExtractRequest) returns (ExtractResponse) {
         option (google.api.http) = {
-            post: "/v1/dependencies/extract"
+            post: "/v1alpha/dependencies/extract"
             body: "*"
         };
     }

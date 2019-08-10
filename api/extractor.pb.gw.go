@@ -144,9 +144,9 @@ func RegisterDependencyExtractorHandlerClient(ctx context.Context, mux *runtime.
 }
 
 var (
-	pattern_DependencyExtractor_Match_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "dependencies", "match"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_DependencyExtractor_Match_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1alpha", "dependencies", "match"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyExtractor_Extract_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "dependencies", "extract"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_DependencyExtractor_Extract_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1alpha", "dependencies", "extract"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
